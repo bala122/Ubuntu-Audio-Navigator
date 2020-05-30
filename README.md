@@ -7,3 +7,4 @@ In order to make this app run you need to have Python3 aside from the following 
 <br/>scipy
 <br/>speech_recognition
 <br/>matplotlib 
+<br/>libgnome2-bin

@@ -13,6 +13,7 @@ duration = 5
 fs=16000
 N=int(duration*fs)
 
+user=input("Please enter your current account username for file navigation\n")
 text=input('Press enter whenever you are ready-')
 while(True):
 	if text =="":
@@ -53,7 +54,7 @@ while(True):
 #Identifying action and object
 
 	obj_lst=["desktop",'documents','music','sound','volume','audio','screen','calculator','brightness','time','date','calendar','file','folder','google','downloads','firefox']
-	action_lst=['make','copy','go','to','open','move','increase','decrease','mute','reduce','unmute']
+	action_lst=['run','make','copy','go','list','to','open','move','increase','decrease','mute','reduce','unmute']
 
 	for i in text.split():
 		i=i.lower()
@@ -67,19 +68,26 @@ while(True):
 #NAVIGATION
 	if (action == "go" or "open" or'to'):	
 		if obj == "desktop":
-			os.system("gnome-open /home/bala/Desktop")
+			os.system("gnome-open /home/"+user+"/Desktop")
 		if obj == 'documents':
-			os.system("gnome-open /home/bala/Documents")
+			os.system("gnome-open /home/"+user+"/Documents")
 		if obj == 'music':
-			os.system("gnome-open /home/bala/Music")
+			os.system("gnome-open /home/"+user+"/Music")
+		if obj == 'videos':
+			os.system("gnome-open /home/"+user+"/Videos")
 		if obj == 'downloads':
-			os.system("gnome-open /home/bala/Downloads")
+			os.system("gnome-open /home/"+user+"/Downloads")
 		if obj == 'pictures':
-			os.system("gnome-open /home/bala/Pictures")
+			os.system("gnome-open /home/"+user+"/Pictures")
+#RUNNING APPS
+	if (action == 'open' or 'run'):
 		if obj == 'calculator':
 			os.system("gnome-calculator")
 		if obj== 'firefox':
 			os.system("firefox")
+#LISTING FILES
+	if(action =='list'):
+		os.system("ls")
 #SOUND SETTINGS
 	if obj == 'volume' or 'audio':
 		if action == 'increase':

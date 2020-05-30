@@ -98,3 +98,5 @@ while(True):
 			os.system("amixer set 'Master' mute")		
 		if action == 'unmute':
 			os.system("amixer set 'Master' unmute")
+	action=""
+	obj=""

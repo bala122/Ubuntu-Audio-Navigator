@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 from scipy.io import wavfile
 import speech_recognition as sr
 import os
+#The audio can have an action and an object(eg-file)
+action=""
+obj=""
 duration = 5
 fs=16000
 N=int(duration*fs)
@@ -18,9 +21,9 @@ data = sd.rec(int(duration*fs),samplerate=fs,channels=1)
 sd.wait()
 freq =(fft((data)))
 w=np.linspace(0,fs/2,num=N/2)
-plt.plot(w,(abs(freq[:N//2])))
+#plt.plot(w,(abs(freq[:N//2])))
 #plt.plot(data)
-plt.show()
+#plt.show()
 
 
 y = (np.iinfo(np.int32).max*(data/np.abs(data).max())).astype(np.int32)
@@ -43,16 +46,39 @@ except sr.UnknownValueError:
 
 #Asking permissions for running command through command terminal
 
-#Using it to either increase / decrease sound
+#Identifying action and object
 
-if 'increase' in text and 'volume' in text:
-	os.system("amixer set 'Master' 10%+")
+obj_lst=["desktop",'documents','music','sound','volume','audio','screen brightness','time','date','calendar','notes','file','folder','google','downloads']
+action_lst=['make','copy','go','to','open','move','increase','decrease','mute','reduce','unmute']
 
+for i in text.split():
+	
+	if i in obj_lst:
+		obj= i
+	if i in action_lst:
+		action=i
 
-if 'decrease' in text and 'volume' in text:
-	os.system("amixer set 'Master' 10%-")
+obj=obj.strip()
+action=action.strip()
 
+#NAVIGATION
+if (action == "go" or "open" or'to'):	
+	if obj == "desktop":
+		os.system("gnome-open /home/bala/Desktop")
+	if obj == 'documents':
+		os.system("gnome-open /home/bala/Documents")
+	if obj == 'music':
+		os.system("gnome-open /home/bala/Music")
+	if obj == 'downloads':
+		os.system("gnome-open /home/bala/Downloads")
 
-if 'increase' in text and 'volume' in text:
-	os.system("amixer set 'Master' 10%+")
-
+#SOUND SETTINGS
+if obj is 'volume' or 'audio':
+	if action is 'increase':
+		os.system("amixer set 'Master' 10%+")
+	if action is 'decrease' or 'reduce':
+		os.system("amixer set 'Master' 10%-")
+	if action is 'mute':
+		os.system("amixer set 'Master' mute")		
+	if action is 'unmute':
+		os.system("amixer set 'Master' unmute")

@@ -4,11 +4,10 @@ DOCUMENTATION
 Features(Version 1)-
 
 Increase or decrease volume.
-Increase or decrease brightness.
 Navigate to primary directories such as- Desktop,Documents,Downloads,Music,Pictures,Videos.
 List directories under current folder.
 
 Future versions-
-To make a looped version with continuous command input.
+Increase or decrease brightness.
 To make it run upon startup of computer.
 To be able to obtain path details after asking permissions from user.
